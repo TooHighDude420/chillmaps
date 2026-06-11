@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router';
 import './app.css';
 
-import Home from "./pages/home";
-import Navbar from "./components/navbar";
-import MakePost from "./pages/makepost";
 import Header from "./components/header";
+import Navbar from "./components/navbar";
+import Home from "./pages/home";
+import Chat from "./pages/chat";
+import MakePost from "./pages/makepost";
+import Map from "./pages/map";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/post" element={<MakePost />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/map" element={<Map />} />
           </Routes>
         </div >
         <Navbar />
