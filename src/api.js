@@ -11,7 +11,7 @@ const databaseCallList = {
   create: addPost
 }
 
-async function getPosts(callback) {
+async function getPosts() {
   const { data, error } = await supabase.from("posts").select();
 
   if (error) {
@@ -19,7 +19,7 @@ async function getPosts(callback) {
     return;
   }
 
-  callback(data);
+  return data;
 }
 
 async function addPost(title, description) {
