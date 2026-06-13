@@ -7,7 +7,7 @@ import Navbar from "./components/navbar";
 import Home from "./pages/home";
 import Chat from "./pages/chat";
 import MakePost from "./pages/makepost";
-import Map from "./pages/map";
+import MapScreen from "./pages/mapScreen";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/post" element={<MakePost />} />
             <Route path="/chat" element={<Chat />} />
-            <Route path="/map" element={<Map />} />
+            <Route path="/map" element={<MapScreen />} />
           </Routes>
         </div >
         <Navbar />

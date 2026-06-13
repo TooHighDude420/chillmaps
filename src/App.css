@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import 'maplibre-gl/dist/maplibre-gl.css';
+@import 'react-loading-skeleton/dist/skeleton.css';
 
 @layer utilities {
 
