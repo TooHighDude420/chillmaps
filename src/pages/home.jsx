@@ -3,7 +3,6 @@ import databaseCallList from "../api";
 import Post from "../components/post";
 import LoadScreen from "../components/loadscreen";
 import Skeleton from "react-loading-skeleton";
-import 'react-loading-skeleton/dist/skeleton.css'
 
 
 function Home() {
@@ -12,7 +11,7 @@ function Home() {
 
     // fetch post from database
     useEffect(() => {
-        databaseCallList.read().then((data) => {
+        databaseCallList.getPosts().then((data) => {
             setPosts(data);
             setLoading(false);
         });
@@ -25,7 +24,7 @@ function Home() {
                     {/* displaying fetched posts */}
                     {loading ? <Skeleton width={"90vw"} height={"20vh"}/> :
                         posts.map((post, key) => (
-                            <Post key={key} title={post.title} description={post.description} />
+                            <Post key={key} title={post.title} description={post.description} media={post.ImageID}/>
                         ))
                     }
                     <LoadScreen />
