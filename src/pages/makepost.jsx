@@ -1,3 +1,4 @@
+import { Navigate } from "react-router";
 import databaseCallList from "../api";
 import testFile from "../assets/hero.png";
 import { useEffect, useState } from "react";
@@ -16,6 +17,10 @@ function insertPost() {
 
 
 function MakePost() {
+    if (!databaseCallList.getLoggedIn()) {
+        return <Navigate to={"/login"} />
+    }
+
     const [selectedFile, setSelectedFile] = useState(null);
 
     function onFileChange(event) {
@@ -32,11 +37,13 @@ function MakePost() {
                 }
             ]).then(() => {
                 databaseCallList.getLatest("Images").then((data) => {
+                    let user = databaseCallList.getUser()
                     databaseCallList.genericInsert("posts", [
                         {
                             title: title,
                             description: description,
-                            ImageID: data[0].ImageID
+                            ImageID: data[0].ImageID,
+                            userID: user.id
                         }
                     ]);
                 });

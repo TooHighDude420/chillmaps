@@ -1,6 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
+
 @import "tailwindcss";
 @import 'maplibre-gl/dist/maplibre-gl.css';
 @import 'react-loading-skeleton/dist/skeleton.css';
+
+
+
+@theme {
+    --font-title: "Fascinate", system-ui;
+}
 
 @layer utilities {
 

@@ -1,8 +1,14 @@
 import maplibregl from 'maplibre-gl';
+import databaseCallList from '../api';
 import React, { useEffect, useRef } from 'react';
 import { Map } from 'maplibre-gl';
+import { Navigate } from 'react-router';
 
 function MapScreen() {
+    if (!databaseCallList.getLoggedIn()) {
+        return <Navigate to={"/login"} />
+    }
+
     const mapContainer = useRef(null);
     const geoApi = import.meta.env.GEOAPIFY;
 
