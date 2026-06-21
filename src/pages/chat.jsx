@@ -2,8 +2,14 @@ import { useEffect, useState } from "react";
 
 import ChatItem from "../components/chatItem";
 import ChatPage from "../components/chatPage";
+import databaseCallList from "../api";
+import { Navigate } from "react-router";
 
 function Chat() {
+    if (!databaseCallList.getLoggedIn()) {
+        return <Navigate to={"/login"} />
+    }
+
     const mockData = [
         {
             "user": "testUser",
