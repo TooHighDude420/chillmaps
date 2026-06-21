@@ -19,9 +19,26 @@ const databaseCallList = {
   getFromStorage,
   getLatest,
   getPosts,
+  getChillspots,
   addPost,
   uploadFile,
   getUser
+}
+
+async function getChillspots(){
+  const { data, error } = await supabase.from("chillspots")
+  .select(`
+    LngLat,
+    title,
+    description,
+    Users (username)
+    `)
+
+  if (data.length < 1) {
+    console.error("no chillspots")
+  } else {
+    return data;
+  }
 }
 
 async function signUpTP(user, username) {
