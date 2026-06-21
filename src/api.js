@@ -7,12 +7,74 @@ if (supabase == null) {
 }
 
 const databaseCallList = {
-  read: getPosts,
-  create: addPost
+  genericInsert,
+  genericGetById,
+  signUpEP,
+  signInEP,
+  signInGH,
+  signUpTP,
+  getLoggedIn,
+  checkUsers,
+  logOff,
+  getFromStorage,
+  getLatest,
+  getPosts,
+  addPost,
+  uploadFile,
+  getUser
 }
 
-async function getPosts() {
-  const { data, error } = await supabase.from("posts").select();
+async function signUpTP(user, username) {
+  await genericInsert("Users", [
+    {
+      UserID: user.id,
+      username: username
+    }
+  ]);
+}
+
+async function checkUsers(userID) {
+  const { data, error } = await supabase.from("Users")
+    .select("username")
+    .eq("UserID", userID)
+
+  if (data.length < 1) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+async function getUser() {
+  const { data: { user } } = await supabase.auth.getUser();
+
+  return user;
+}
+
+async function getLoggedIn() {
+  const user = await getUser();
+
+  if (user) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+async function logOff() {
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+}
+
+async function signInEP(email, password) {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email,
+    password: password,
+  })
 
   if (error) {
     console.error(error);
@@ -22,13 +84,127 @@ async function getPosts() {
   return data;
 }
 
-async function addPost(title, description) {
-  const { data, error } = await supabase.from('posts')
+async function signInGH() {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'github',
+    options: {
+      redirectTo: `http://localhost:5173/tpsignup`,
+    },
+  })
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+}
+
+async function signUpEP(uEmail, uPassword, username) {
+  const { data, error } = await supabase.auth.signUp({
+    email: uEmail,
+    password: uPassword,
+    username: username,
+    options: {
+      emailRedirectTo: 'https://localhost:5173/',
+    },
+  })
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  genericInsert("Users", [
+    {
+      UserID: data.user.id,
+      username: username
+    }
+  ])
+
+  return data;
+}
+
+async function uploadFile(filepath, file) {
+  const { data, error } = await supabase.storage
+    .from('Media')
+    .upload(filepath, file);
+
+  if (error) {
+    console.log(error);
+    return;
+  }
+
+  return data;
+}
+
+async function getPosts() {
+  const { data, error } = await supabase.from("posts").select(`
+    title,
+    description,
+    Images (bucket, path),
+    posted_on,
+    Users (UserID, username)
+  `);
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+  console.log(data)
+  return data;
+}
+
+async function getLatest(table) {
+  const { data, error } = await supabase.from(table)
+    .select()
+    .order('ImageID', { ascending: false })
+    .limit(1);
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  return data;
+}
+
+async function getFromStorage(bucket, path) {
+  const { data } = supabase.storage.from(bucket).getPublicUrl(path)
+
+  return data.publicUrl
+}
+
+async function genericGetById(table, idfield, id) {
+  const { data, error } = await supabase.from(table)
+    .select()
+    .eq(idfield, id)
+
+  if (error) {
+    console.error(error);
+  }
+
+  return data
+}
+
+
+async function genericInsert(table, value) {
+  const { data, error } = await supabase.from(table)
+    .insert(value);
+
+  if (error) {
+    console.error(error);
+  }
+
+  return data;
+}
+
+async function addPost(title, description, user) {
+  const error = await supabase.from('posts')
     .insert(
       [
         {
           title: title,
-          description: description
+          description: description,
+          userID: user.user.id
         }
       ]
     )

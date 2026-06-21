@@ -2,8 +2,14 @@ import { useEffect, useState } from "react";
 
 import ChatItem from "../components/chatItem";
 import ChatPage from "../components/chatPage";
+import databaseCallList from "../api";
+import { Navigate } from "react-router";
 
 function Chat() {
+    if (!databaseCallList.getLoggedIn()) {
+        return <Navigate to={"/login"} />
+    }
+
     const mockData = [
         {
             "user": "testUser",
@@ -25,7 +31,15 @@ function Chat() {
                 { "username": "mom", "message": "what do you want for dinner?" },
                 { "username": "Admin", "message": "lasagna sounds good" }
             ]
-        }
+        },
+        {
+            "user": "Naomi",
+            "messages": [
+                { "username": "Naomi", "message": "Heeeyyyy" },
+                { "username": "Naomi", "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
+                { "username": "Admin", "message": "Ik kies een andere" }
+            ]
+        },
     ]
 
     const [activeChat, setActiveChat] = useState([]);

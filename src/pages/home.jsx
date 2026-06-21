@@ -3,16 +3,20 @@ import databaseCallList from "../api";
 import Post from "../components/post";
 import LoadScreen from "../components/loadscreen";
 import Skeleton from "react-loading-skeleton";
-import 'react-loading-skeleton/dist/skeleton.css'
+import { Navigate } from "react-router";
 
 
 function Home() {
+    if (!databaseCallList.getLoggedIn()) {
+        return <Navigate to={"/login"} />
+    }
+
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     // fetch post from database
     useEffect(() => {
-        databaseCallList.read().then((data) => {
+        databaseCallList.getPosts().then((data) => {
             setPosts(data);
             setLoading(false);
         });
@@ -23,9 +27,9 @@ function Home() {
             <div className="w-[90%] flex flex-col items-center">
                 <div className="w-[90%]  flex flex-col items-center gap-y-4 py-2 no-scrollbar">
                     {/* displaying fetched posts */}
-                    {loading ? <Skeleton width={"90vw"} height={"20vh"}/> :
+                    {loading ? <Skeleton width={"90vw"} height={"20vh"} /> :
                         posts.map((post, key) => (
-                            <Post key={key} title={post.title} description={post.description} />
+                            <Post key={key} title={post.title} description={post.description} media={post.Images} user={post.Users}/>
                         ))
                     }
                     <LoadScreen />
