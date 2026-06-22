@@ -13,21 +13,41 @@ const databaseCallList = {
   signInEP,
   signInGH,
   signUpTP,
+  likePost,
+  unlikePost,
   getLoggedIn,
   checkUsers,
   logOff,
   getFromStorage,
   getLatest,
   getPosts,
+  getComments,
+  getLikes,
   getChillspots,
   addPost,
   uploadFile,
   getUser
 }
 
-async function getChillspots(){
+async function getComments(postID) {
+  const { data, error } = await supabase.from("comments")
+    .select(`
+      comment,
+      Users(username)
+    `)
+    .eq('post_id', postID)
+
+  if (error) {
+    console.error(error)
+    return
+  }
+
+  return data;
+}
+
+async function getChillspots() {
   const { data, error } = await supabase.from("chillspots")
-  .select(`
+    .select(`
     LngLat,
     title,
     description,
@@ -153,8 +173,64 @@ async function uploadFile(filepath, file) {
   return data;
 }
 
+async function getLikes(postID) {
+  const { data, error } = await supabase.from("posts")
+    .select('likes')
+    .eq('postID', postID)
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  return data[0]
+}
+
+async function likePost(postID) {
+  const likes = await getLikes(postID);
+
+  let newLikes;
+
+  console.log(likes.likes);
+
+  if (likes.likes == undefined) {
+    newLikes = 1;
+  } else {
+    newLikes = likes.likes + 1;
+  }
+
+  const { error } = await supabase.from('posts')
+    .update({ likes: newLikes })
+    .eq("postID", postID)
+
+  console.log(newLikes);
+
+  if (error) {
+    console.error(error)
+  } else {
+    return "success"
+  }
+}
+
+async function unlikePost(postID) {
+  const likes = await getLikes(postID);
+
+  let newLikes = likes.likes - 1;
+
+  const { error } = await supabase.from('posts')
+    .update({ likes: newLikes })
+    .eq("postID", postID)
+
+  if (error) {
+    console.error(error)
+  } else {
+    return "success"
+  }
+}
+
 async function getPosts() {
   const { data, error } = await supabase.from("posts").select(`
+    postID,
     title,
     description,
     Images (bucket, path),
