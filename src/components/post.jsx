@@ -84,7 +84,6 @@ function Post({ post, id }) {
             <div className="hidden h-fit max-h-[50vh] w-full flex flex-col justify-between items-center overflow-y-scroll no-scrollbar" id={`commentsec${id}`}>
                 <div className="flex flex-col items-center py-2">
                     {comments.map((com) => {
-                        console.log(com)
                         return (
                             <div className="w-full flex gap-x-5">
                                 <p>{com.Users.username}:</p>

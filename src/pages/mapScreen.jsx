@@ -117,7 +117,6 @@ function MapScreen() {
                                     e.preventDefault();
 
                                     addChillSpot(coords, e.target.title.value, e.target.description.value).then((mess) => {
-                                        console.log(mess)
                                         setPopup(false)
                                         setDirty(true)
                                     });

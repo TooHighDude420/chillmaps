@@ -4,7 +4,7 @@ import { Navigate, redirect, useNavigate } from "react-router";
 
 function Login() {
     const [register, setRegister] = useState(false);
-    var navigate = useNavigate();
+    const navigate = useNavigate();
 
     function handleLogin() {
         if (!document.getElementById("login").hasAttribute('disabled')) {
@@ -29,7 +29,6 @@ function Login() {
 
     function handleGH(){
         databaseCallList.signInGH().then((mess) =>{
-            console.log(mess);
         });
     }
 
@@ -59,7 +58,7 @@ function Login() {
     }
 
     return (
-        < div className="flex justify-center items-center h-[80vh] w-full" >
+        <div className="flex justify-center items-center h-[80vh] w-full" >
             <div className="h-full w-[80%] flex flex-col p-5 items-center rounded-4xl bg-blue-800">
                 <div>
                     <p className="text-5xl font-title">Chillmaps</p>
@@ -135,13 +134,8 @@ function Login() {
 
                     <button onClick={() => {
                         databaseCallList.getUser().then((mess) => {
-                            console.log(mess);
                         })
                     }}> print user </button>
-
-                    <button onClick={() => {
-                        databaseCallList.logOff().then();
-                    }}> logout </button>
                 </div>
             </div>
         </div>

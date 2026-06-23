@@ -1,4 +1,4 @@
-import { Navigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import databaseCallList from "../api";
 import testFile from "../assets/hero.png";
 import { useEffect, useState } from "react";
@@ -17,11 +17,20 @@ function insertPost() {
 
 
 function MakePost() {
+    const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null);
+
+
     if (!databaseCallList.getLoggedIn()) {
-        return <Navigate to={"/login"} />
+        return navigate("/login")
     }
 
-    const [selectedFile, setSelectedFile] = useState(null);
+    useEffect(() => {
+        databaseCallList.getUser().then((msg) => {
+            setUser(msg)
+        })
+    })
 
     function onFileChange(event) {
         setSelectedFile(event.target.files[0]);
@@ -37,7 +46,6 @@ function MakePost() {
                 }
             ]).then(() => {
                 databaseCallList.getLatest("Images").then((data) => {
-                    let user = databaseCallList.getUser()
                     databaseCallList.genericInsert("posts", [
                         {
                             title: title,
