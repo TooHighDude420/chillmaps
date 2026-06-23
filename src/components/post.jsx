@@ -63,7 +63,7 @@ function Post({ post, id }) {
                 <p>{post.description}</p>
             </div>
 
-            <div className="flex w-full justify-center items-center gap-x-5">
+            <div className="flex w-full justify-center items-center gap-x-5 pb-2">
                 <div className="flex w-fit gap-x-2 justify-center items-center">
                     <button onClick={handleLike}>
                         <img src={liked ? full_licon : licon} className="size-8" />
@@ -81,19 +81,20 @@ function Post({ post, id }) {
                 </div>
             </div>
 
-            <div className="hidden h-fit max-h-[50vh] w-full flex flex-col justify-between items-center overflow-y-scroll no-scrollbar" id={`commentsec${id}`}>
-                <div className="flex flex-col items-center py-2">
-                    {comments.map((com) => {
-                        return (
-                            <div className="w-full flex gap-x-5">
-                                <p>{com.Users.username}:</p>
-                                <p>{com.comment}</p>
-                            </div>
-                        )
-                    })}
+            <div className="hidden h-fit max-h-[50vh] w-full flex flex-col justify-between items-center" id={`commentsec${id}`}>
+                <div className="flex w-[90%] flex-col items-center py-2 bg-[#043236] rounded-2xl">
+                    {comments.length > 0 ?
+                        comments.map((com) => {
+                            return (
+                                <div className="w-full px-5 flex justify-between gap-x-5 overflow-y-scroll no-scrollbar">
+                                    <p>{com.Users.username}:</p>
+                                    <p>{com.comment}</p>
+                                </div>
+                            )
+                        })
+                        : <p>no comments</p>}
                 </div>
 
-                {/* TODO: fwtch actual comments */}
                 <form onSubmit={(e) => {
                     e.preventDefault();
 
@@ -105,7 +106,7 @@ function Post({ post, id }) {
                         }
                     ]).then();
                 }}>
-                    <div className="flex gap-x-4">
+                    <div className="flex gap-x-4 py-2">
                         <input type="text" id="comment" className="bg-white rounded-2xl pl-5 text-black" />
                         <button type="submit">comment</button>
                     </div>

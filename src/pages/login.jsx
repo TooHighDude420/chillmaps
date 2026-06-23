@@ -27,8 +27,8 @@ function Login() {
         }
     }
 
-    function handleGH(){
-        databaseCallList.signInGH().then((mess) =>{
+    function handleGH() {
+        databaseCallList.signInGH().then((mess) => {
         });
     }
 
@@ -54,12 +54,11 @@ function Login() {
                 document.getElementById("login").removeAttribute('disabled')
             }
         }
-
     }
 
     return (
         <div className="flex justify-center items-center h-[80vh] w-full" >
-            <div className="h-full w-[80%] flex flex-col p-5 items-center rounded-4xl bg-blue-800">
+            <div className="h-full w-[80%] flex flex-col p-5 items-center rounded-4xl bg-[#0a2a2d]">
                 <div>
                     <p className="text-5xl font-title">Chillmaps</p>
                 </div>
@@ -110,7 +109,7 @@ function Login() {
                             </div>
                         </div>}
                 <div className="w-full flex justify-center gap-x-5">
-                    <button className="w-[20%] rounded-2xl bg-blue-700 hover:bg-blue-900"
+                    <button className="w-[20%] rounded-2xl bg-[#0e3b3f] hover:bg-[#0c3236]"
                         onClick={() => {
                             handleLogin();
                         }}
@@ -121,21 +120,17 @@ function Login() {
 
                         id="login">{register ? "register" : "login"}</button>
 
-                    <button className="w-[20%] rounded-2xl bg-blue-700 hover:bg-blue-900"
+                    <button className="w-[20%] rounded-2xl bg-[#0e3b3f] hover:bg-[#0c3236]"
                         onClick={() => {
                             handleRegister();
                         }}
 
                         id="register">{register ? "login" : "register"}</button>
 
-                    <button onClick={() => {
-                        handleGH()
-                    }}> GitHub </button>
-
-                    <button onClick={() => {
-                        databaseCallList.getUser().then((mess) => {
-                        })
-                    }}> print user </button>
+                    <button className="w-[20%] rounded-2xl bg-[#0e3b3f] hover:bg-[#0c3236]"
+                        onClick={() => {
+                            handleGH()
+                        }}> GitHub </button>
                 </div>
             </div>
         </div>
