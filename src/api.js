@@ -210,7 +210,7 @@ async function uploadFile(filepath, file) {
     .upload(filepath, file);
 
   if (error) {
-    console.log(error);
+    console.error(error);
     return;
   }
 
@@ -285,8 +285,6 @@ async function likePost(postID) {
 
   let newLikes;
 
-  console.log(likes.likes);
-
   if (likes.likes == undefined) {
     newLikes = 1;
   } else {
@@ -334,7 +332,7 @@ async function getPosts() {
     console.error(error);
     return;
   }
-  console.log(data)
+
   return data;
 }
 

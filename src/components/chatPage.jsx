@@ -39,7 +39,6 @@ function ChatPage({ username, messages }) {
                     <input className="w-[90%] focus:outline-0" type="text" id="newMessage" placeholder="type your message here" onKeyDown={(key) => {
                         if (key.key == "Enter") {
                             let newMessage = document.getElementById("newMessage");
-                            console.log("send: " + newMessage.value)
                             newMessage.value = ""
                         }
                     }} />

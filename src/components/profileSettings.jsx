@@ -1,20 +1,28 @@
 import { useEffect, useState } from "react"
 import databaseCallList from "../api";
+import { useNavigate } from "react-router";
 
 function ProfileSettings({ cUser }) {
     const [user, setUser] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
 
+    const navigate = useNavigate()
+
     useEffect(() => {
         databaseCallList.getUser().then((msg) => {
-            console.log(msg)
             setUser(msg);
         })
     }, [])
 
     function handleUpdate(username, email, bio) {
+        let active = 0;
+        let done = 0;
+
         if (selectedFile) {
+            active++;
+
             let nor_name = selectedFile.name.replace(" ", "_");
+
             databaseCallList.uploadFile(`${Date.now()}.${nor_name}`, selectedFile).then((data) => {
                 databaseCallList.genericInsert("Images", [
                     {
@@ -24,36 +32,46 @@ function ProfileSettings({ cUser }) {
                 ]).then(() => {
                     databaseCallList.getLatest("Images").then((res) => {
                         databaseCallList.updateAvatar(user.id, res[0].ImageID).then((msg) => {
+                            done++;
+                            if (done == active) {
+                                navigate('/')
+                            }
                         });
                     })
                 });
-
-
-                console.log(data)
-
-
             });
         }
 
         if (username != cUser[0].username) {
+            active++;
             databaseCallList.updateUsername(username, user.id).then((msg) => {
-                console.log(msg)
+                done++;
+                if (done == active) {
+                    navigate('/')
+                }
             })
         }
 
         if (email != user.email) {
+            active++;
             databaseCallList.updateEmail(email).then((msg) => {
-                console.log(msg)
+                done++;
+
+                if (done == active) {
+                    navigate('/')
+                }
             })
         }
 
         if (bio != cUser[0].bio) {
+            active++;
             databaseCallList.updateBio(bio, user.id).then((msg) => {
-                console.log(msg)
+                done++;
+                if (done == active) {
+                    navigate('/')
+                }
             })
         }
-
-
 
     }
 

@@ -29,7 +29,6 @@ function Login() {
 
     function handleGH(){
         databaseCallList.signInGH().then((mess) =>{
-            console.log(mess);
         });
     }
 
@@ -135,7 +134,6 @@ function Login() {
 
                     <button onClick={() => {
                         databaseCallList.getUser().then((mess) => {
-                            console.log(mess);
                         })
                     }}> print user </button>
                 </div>

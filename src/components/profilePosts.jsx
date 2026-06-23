@@ -7,10 +7,8 @@ function ProfilePosts({ user }) {
     const [posts, setPosts] = useState(null);
 
     useEffect(() => {
-        console.log(user)
         databaseCallList.getPostsWithId(user[0].UserID).then((msg) => {
             setPosts(msg);
-            console.log(msg)
         });
     }, []);
 
