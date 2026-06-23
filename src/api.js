@@ -13,21 +13,67 @@ const databaseCallList = {
   signInEP,
   signInGH,
   signUpTP,
+  likePost,
+  unlikePost,
   getLoggedIn,
   checkUsers,
   logOff,
   getFromStorage,
   getLatest,
   getPosts,
+  getPostsWithId,
+  getComments,
+  getLikes,
   getChillspots,
+  getOwnUser,
   addPost,
   uploadFile,
-  getUser
+  getUser,
+  updateAvatar,
+  updateUsername,
+  updateBio,
+  updateEmail
 }
 
-async function getChillspots(){
+async function getPostsWithId(userID) {
+  const { data, error } = await supabase.from("posts")
+    .select(`
+      postID,
+      title,
+      description,
+      Images (bucket, path),
+      posted_on,
+      Users (UserID, username)
+    `)
+    .eq('userID', userID)
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  return data;
+}
+
+async function getComments(postID) {
+  const { data, error } = await supabase.from("comments")
+    .select(`
+      comment,
+      Users(username)
+    `)
+    .eq('post_id', postID)
+
+  if (error) {
+    console.error(error)
+    return
+  }
+
+  return data;
+}
+
+async function getChillspots() {
   const { data, error } = await supabase.from("chillspots")
-  .select(`
+    .select(`
     LngLat,
     title,
     description,
@@ -66,6 +112,24 @@ async function getUser() {
   const { data: { user } } = await supabase.auth.getUser();
 
   return user;
+}
+
+async function getOwnUser(UserID) {
+  const { data, error } = await supabase.from('Users')
+    .select(`
+    UserID,
+    Images(bucket, path),
+    username,
+    bio
+  `)
+    .eq('UserID', UserID)
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  return data
 }
 
 async function getLoggedIn() {
@@ -146,15 +210,117 @@ async function uploadFile(filepath, file) {
     .upload(filepath, file);
 
   if (error) {
-    console.log(error);
+    console.error(error);
     return;
   }
 
   return data;
 }
 
+async function getLikes(postID) {
+  const { data, error } = await supabase.from("posts")
+    .select('likes')
+    .eq('postID', postID)
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  return data[0]
+}
+
+async function updateAvatar(userID, imageID) {
+  const { error } = await supabase.from('Users')
+    .update({ AvatarID: imageID })
+    .eq("UserID", userID);
+
+  if (error) {
+    console.error(error);
+    return;
+  } else {
+    return "success"
+  }
+}
+
+async function updateUsername(username, userID) {
+  const { error } = await supabase.from("Users")
+    .update({ username: username })
+    .eq("UserID", userID)
+
+  if (error) {
+    console.error(error);
+  } else {
+    return "success"
+  }
+}
+
+async function updateBio(newBio, userID) {
+  const { error } = await supabase.from("Users")
+    .update({ bio: newBio })
+    .eq("UserID", userID)
+
+  if (error) {
+    console.error(error);
+  } else {
+    return "success"
+  }
+}
+
+async function updateEmail(newEmail) {
+  const { error } = await supabase.auth.updateUser({
+    email: newEmail
+  });
+
+  if (error) {
+    console.error(error);
+    return;
+  } else {
+    return "success"
+  }
+}
+
+async function likePost(postID) {
+  const likes = await getLikes(postID);
+
+  let newLikes;
+
+  if (likes.likes == undefined) {
+    newLikes = 1;
+  } else {
+    newLikes = likes.likes + 1;
+  }
+
+  const { error } = await supabase.from('posts')
+    .update({ likes: newLikes })
+    .eq("postID", postID)
+
+  if (error) {
+    console.error(error)
+  } else {
+    return "success"
+  }
+}
+
+async function unlikePost(postID) {
+  const likes = await getLikes(postID);
+
+  let newLikes = likes.likes - 1;
+
+  const { error } = await supabase.from('posts')
+    .update({ likes: newLikes })
+    .eq("postID", postID)
+
+  if (error) {
+    console.error(error)
+  } else {
+    return "success"
+  }
+}
+
 async function getPosts() {
   const { data, error } = await supabase.from("posts").select(`
+    postID,
     title,
     description,
     Images (bucket, path),
@@ -166,7 +332,7 @@ async function getPosts() {
     console.error(error);
     return;
   }
-  console.log(data)
+
   return data;
 }
 

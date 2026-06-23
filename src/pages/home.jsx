@@ -27,6 +27,7 @@ function Home() {
     function getPosts() {
         databaseCallList.getPosts().then((data) => {
             setAllPosts(data);
+            setPosts(data);
             setLoading(false);
         });
     }
@@ -47,7 +48,7 @@ function Home() {
                     {/* displaying fetched posts */}
                     {loading ? <Skeleton width={"90vw"} height={"20vh"} /> :
                         posts.map((post, key) => (
-                            <Post key={key} title={post.title} description={post.description} media={post.Images} user={post.Users} />
+                            <Post post={post} id={key} />
                         ))
                     }
                 </div>

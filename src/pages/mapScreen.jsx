@@ -38,12 +38,12 @@ function MapScreen() {
             offset: [0, -64] // height - shadow
         })
             .setHTML(`
-            <div class='w-[10vh] text-black'>
-                <p>${spot.title}</p>    
-                <p>${spot.description}</p>    
-                <p>${spot.Users.username}</p>
-            </div>    
-        `);
+                <div class='min-w-[10vh] flex flex-col items-center text-black text-lg'>
+                    <p>${spot.title}</p>        
+                    <p>${spot.description}</p>    
+                    <p>${spot.Users.username}</p>
+                </div>    
+            `);
 
         return popup
     }
@@ -111,27 +111,33 @@ function MapScreen() {
                 <div></div>
                 : <div className='h-screen w-screen z-100 absolute top-0 flex justify-center items-center'>
                     <div className='h-[80vh] w-screen flex justify-center items-center'>
-                        <div className='h-[50%] w-[50%] bg-amber-500 rounded-3xl p-5'>
-                            <form onSubmit={
+                        <div className='h-[50%] w-[50%] bg-[#0a2a2d] rounded-3xl p-5'>
+                            <form className='w-full h-full flex flex-col items-center justify-around p-5 gap-y-5' onSubmit={
                                 async (e) => {
                                     e.preventDefault();
 
                                     addChillSpot(coords, e.target.title.value, e.target.description.value).then((mess) => {
-                                        console.log(mess)
                                         setPopup(false)
                                         setDirty(true)
                                     });
 
                                 }
                             }>
-                                <label htmlFor="title">title</label>
-                                <input type="text" name="title" id="title" />
+                                <div className='w-full flex justify-center items-center gap-x-5'>
+                                    <label htmlFor="title" className="text-2xl">title</label>
+                                    <input type="text" name="title" id="title" className="bg-white text-black rounded-2xl pl-2 text-xl" required />
+                                </div>
 
-                                <label htmlFor="description">description</label>
-                                <input type="text" name="description" id="description" />
+                                <div className='w-full flex justify-center items-center gap-x-5'>
+                                    <label htmlFor="description" className="text-2xl">description</label>
+                                    <input type="text" name="description" id="description" className="bg-white text-black rounded-2xl pl-2 text-xl" required />
+                                </div>
 
-                                <button type="submit">make spot</button>
-                                <button onClick={() => { setPopup(false) }}>close</button>
+                                <div className='w-full flex justify-center items-center gap-x-5'>
+                                    <button type="submit" className="w-[20%] bg-[#032327] rounded-full p-1">make spot</button>
+                                    <button onClick={() => { setPopup(false) }} className="w-[10%] bg-[#032327] rounded-full p-1" >close</button>
+                                </div>
+
                             </form>
 
                         </div>
