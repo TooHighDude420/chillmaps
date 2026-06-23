@@ -9,6 +9,7 @@ import Chat from "./pages/chat";
 import MakePost from "./pages/makepost";
 import MapScreen from "./pages/mapScreen";
 import Login from "./pages/login";
+import Profile from "./pages/profile";
 import NotFound from "./pages/notfound";
 import TPSignUp from "./pages/tpsignup";
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/map" element={<MapScreen />} />
             <Route path="/login" element={<Login />} />
             <Route path="/tpsignup" element={<TPSignUp />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div >

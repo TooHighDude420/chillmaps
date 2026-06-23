@@ -4,8 +4,10 @@ import { Navigate, useNavigate } from "react-router"
 import databaseCallList from "../api";
 
 function NotFound() {
+    const navigate = useNavigate()
+
     if (!databaseCallList.getLoggedIn()) {
-        return <Navigate to={'/login'} />
+        return navigate('/login');
     } else {
         return (
             <div className="h-[80vh] w-full flex flex-col justify-center items-center">
