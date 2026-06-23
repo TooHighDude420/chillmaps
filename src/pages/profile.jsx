@@ -41,12 +41,12 @@ function Profile() {
                 <div className="h-[10vh] w-full flex justify-center items-center text-3xl py-2">
                     {user ? <p>{user[0].username}</p> : <p> </p>}
                 </div>
-                <div className="h-[30vh] w-full flex justify-center">
-                    <div className="flex w-[90%] h-full items-center">
+                <div className="h-[30vh] w-full flex justify-center items-center">
+                    <div className="flex w-[90%] h-full just items-center">
                         <div className="w-[20%] h-full ">
-                            <img className="h-full w-full rounded-full size-8" src={img ? img : profilePic}></img>
+                            <img className="h-full w-full rounded-full size-8 px-3" src={img ? img : profilePic}></img>
                         </div>
-                        <div className="w-[80%] p-5 text-2xl h-full">
+                        <div className="w-[80%] p-5 rounded-2xl text-2xl h-full bg-[#0e3b3f]">
                             <p>{user ? user[0].bio : "test"}</p>
                         </div>
                     </div>
