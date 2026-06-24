@@ -8,19 +8,21 @@ import { Navigate, useNavigate } from "react-router";
 function Home() {
     const navigate = useNavigate();
 
-    if (!databaseCallList.getLoggedIn()) {
-        navigate('/login');
-    }
+    useEffect(() => {
+        databaseCallList.getLoggedIn().then(() => {
+            navigate('/login');
+        });
+    })
 
     const [allPosts, setAllPosts] = useState([]);
     const [posts, setPosts] = useState(allPosts);
     const [loading, setLoading] = useState(true);
 
     function filterPosts(search) {
-       return allPosts.filter((item) => {
+        return allPosts.filter((item) => {
             return item.Users.username.includes(search)
-            || item.title.toLowerCase().includes(search.toLowerCase())
-            || item.description.toLowerCase().includes(search.toLowerCase())
+                || item.title.toLowerCase().includes(search.toLowerCase())
+                || item.description.toLowerCase().includes(search.toLowerCase())
         });
     }
 
