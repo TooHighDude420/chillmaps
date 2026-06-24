@@ -128,6 +128,7 @@ function Login() {
                         id="register">{register ? "login" : "register"}</button>
 
                     <button className="w-[20%] rounded-2xl bg-[#0e3b3f] hover:bg-[#0c3236]"
+                        id="github"
                         onClick={() => {
                             handleGH()
                         }}> GitHub </button>

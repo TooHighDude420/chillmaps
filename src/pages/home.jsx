@@ -9,8 +9,10 @@ function Home() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        databaseCallList.getLoggedIn().then(() => {
-            navigate('/login');
+        databaseCallList.getLoggedIn().then((msg) => {
+            if (!msg) {
+                navigate('/login');
+            }
         });
     })
 

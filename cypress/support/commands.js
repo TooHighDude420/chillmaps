@@ -10,7 +10,13 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('login', (email, password) => {
+    cy.visit('http://localhost:5173/login');
+    cy.get('input[id=email]').should('exist').type("test@gmail.com");
+    cy.get('input[id=password]').should('exist').type("test123");
+    cy.get('button[id=login]').should('exist').click()
+    cy.url().should('eq', 'http://localhost:5173/');
+})
 //
 //
 // -- This is a child command --

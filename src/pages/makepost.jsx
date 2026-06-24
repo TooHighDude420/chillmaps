@@ -17,7 +17,7 @@ function MakePost() {
         databaseCallList.getUser().then((msg) => {
             setUser(msg)
         })
-    })
+    }, [])
 
     function onFileChange(event) {
         setSelectedFile(event.target.files[0]);

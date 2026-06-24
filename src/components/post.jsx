@@ -65,7 +65,7 @@ function Post({ post, id }) {
 
             <div className="flex w-full justify-center items-center gap-x-5 pb-2">
                 <div className="flex w-fit gap-x-2 justify-center items-center">
-                    <button onClick={handleLike}>
+                    <button onClick={handleLike} id={`likebtn${id}`}>
                         <img src={liked ? full_licon : licon} className="size-8" />
                     </button>
 
@@ -73,7 +73,7 @@ function Post({ post, id }) {
                 </div>
 
                 <div className="flex w-fit gap-x-2 justify-center items-center">
-                    <button onClick={handleComment}>
+                    <button onClick={handleComment}  id={`commentbtn${id}`}>
                         <img src={commicon} className="size-8 rotate-z-90" />
                     </button>
 
@@ -101,14 +101,14 @@ function Post({ post, id }) {
                     databaseCallList.genericInsert("comments", [
                         {
                             post_id: post.postID,
-                            comment: e.target.comment.value,
+                            comment: e.target[`comment${id}`].value,
                             user_id: user.id
                         }
                     ]).then();
                 }}>
                     <div className="flex gap-x-4 py-2">
-                        <input type="text" id="comment" className="bg-white rounded-2xl pl-5 text-black" />
-                        <button type="submit">comment</button>
+                        <input type="text" id={`comment${id}`} className="bg-white rounded-2xl pl-5 text-black" />
+                        <button type="submit" id={`commentsub${id}`}>comment</button>
                     </div>
                 </form>
             </div>

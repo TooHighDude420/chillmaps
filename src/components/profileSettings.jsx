@@ -2,17 +2,9 @@ import { useEffect, useState } from "react"
 import databaseCallList from "../api";
 import { useNavigate } from "react-router";
 
-function ProfileSettings({ cUser }) {
-    const [user, setUser] = useState(null);
+function ProfileSettings({ cUser, user }) {
     const [selectedFile, setSelectedFile] = useState(null);
-
     const navigate = useNavigate()
-
-    useEffect(() => {
-        databaseCallList.getUser().then((msg) => {
-            setUser(msg);
-        })
-    }, [])
 
     function handleUpdate(username, email, bio) {
         let active = 0;
@@ -102,7 +94,7 @@ function ProfileSettings({ cUser }) {
                         <label htmlFor="bio">bio</label>
                         <input className="bg-white rounded-2xl pl-2 text-black" type="bio" name="bio" id="bio" defaultValue={cUser[0].bio} />
 
-                        <button type="submit">Update!</button>
+                        <button type="submit" id="update">Update!</button>
                     </form>
                     : <p>loading</p>
             }
