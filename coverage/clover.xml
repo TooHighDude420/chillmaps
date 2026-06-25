@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1782395752050" clover="3.2.0">
-  <project timestamp="1782395752050" name="All files">
+<coverage generated="1782415361072" clover="3.2.0">
+  <project timestamp="1782415361072" name="All files">
     <metrics statements="356" coveredstatements="157" conditionals="113" coveredconditionals="38" methods="128" coveredmethods="62" elements="597" coveredelements="257" complexity="0" loc="356" ncloc="356" packages="3" files="18" classes="18"/>
     <package name="src">
       <metrics statements="119" coveredstatements="44" conditionals="35" coveredconditionals="7" methods="27" coveredmethods="16"/>
@@ -17,7 +17,7 @@
         <line num="51" count="0" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
         <line num="55" count="0" type="stmt"/>
-        <line num="59" count="360" type="stmt"/>
+        <line num="59" count="384" type="stmt"/>
         <line num="66" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="67" count="0" type="stmt"/>
         <line num="68" count="0" type="stmt"/>
@@ -31,16 +31,16 @@
         <line num="104" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="105" count="0" type="stmt"/>
         <line num="107" count="0" type="stmt"/>
-        <line num="112" count="421" type="stmt"/>
-        <line num="114" count="129" type="stmt"/>
+        <line num="112" count="445" type="stmt"/>
+        <line num="114" count="99" type="stmt"/>
         <line num="118" count="10" type="stmt"/>
         <line num="127" count="10" type="cond" truecount="0" falsecount="1"/>
         <line num="128" count="0" type="stmt"/>
         <line num="129" count="0" type="stmt"/>
         <line num="132" count="10" type="stmt"/>
         <line num="136" count="41" type="stmt"/>
-        <line num="138" count="33" type="cond" truecount="2" falsecount="0"/>
-        <line num="139" count="31" type="stmt"/>
+        <line num="138" count="32" type="cond" truecount="2" falsecount="0"/>
+        <line num="139" count="30" type="stmt"/>
         <line num="141" count="2" type="stmt"/>
         <line num="146" count="0" type="stmt"/>
         <line num="148" count="0" type="cond" truecount="0" falsecount="1"/>
@@ -66,7 +66,7 @@
         <line num="213" count="0" type="stmt"/>
         <line num="214" count="0" type="stmt"/>
         <line num="217" count="1" type="stmt"/>
-        <line num="221" count="361" type="stmt"/>
+        <line num="221" count="385" type="stmt"/>
         <line num="225" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="226" count="0" type="stmt"/>
         <line num="227" count="0" type="stmt"/>
@@ -113,8 +113,8 @@
         <line num="346" count="0" type="stmt"/>
         <line num="347" count="0" type="stmt"/>
         <line num="350" count="1" type="stmt"/>
-        <line num="354" count="360" type="stmt"/>
-        <line num="356" count="360" type="stmt"/>
+        <line num="354" count="384" type="stmt"/>
+        <line num="356" count="384" type="stmt"/>
         <line num="360" count="0" type="stmt"/>
         <line num="364" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="365" count="0" type="stmt"/>
@@ -168,20 +168,20 @@
       </file>
       <file name="post.jsx" path="C:/School/frontend/frontend-2/chillmaps/src/components/post.jsx">
         <metrics statements="25" coveredstatements="20" conditionals="5" coveredconditionals="3" methods="10" coveredmethods="7"/>
-        <line num="8" count="1232" type="stmt"/>
-        <line num="9" count="1232" type="stmt"/>
-        <line num="10" count="1232" type="stmt"/>
-        <line num="11" count="1232" type="stmt"/>
-        <line num="12" count="1232" type="stmt"/>
-        <line num="14" count="1232" type="stmt"/>
-        <line num="15" count="360" type="stmt"/>
-        <line num="16" count="360" type="stmt"/>
-        <line num="19" count="360" type="stmt"/>
+        <line num="8" count="1150" type="stmt"/>
+        <line num="9" count="1150" type="stmt"/>
+        <line num="10" count="1150" type="stmt"/>
+        <line num="11" count="1150" type="stmt"/>
+        <line num="12" count="1150" type="stmt"/>
+        <line num="14" count="1150" type="stmt"/>
+        <line num="15" count="384" type="stmt"/>
+        <line num="16" count="384" type="stmt"/>
+        <line num="19" count="384" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
-        <line num="23" count="360" type="stmt"/>
+        <line num="23" count="384" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
-        <line num="27" count="360" type="stmt"/>
-        <line num="28" count="76" type="stmt"/>
+        <line num="27" count="384" type="stmt"/>
+        <line num="28" count="47" type="stmt"/>
         <line num="33" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="34" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
@@ -254,24 +254,24 @@
       </file>
       <file name="home.jsx" path="C:/School/frontend/frontend-2/chillmaps/src/pages/home.jsx">
         <metrics statements="18" coveredstatements="15" conditionals="6" coveredconditionals="3" methods="10" coveredmethods="7"/>
-        <line num="9" count="30" type="stmt"/>
-        <line num="11" count="30" type="stmt"/>
+        <line num="9" count="28" type="stmt"/>
+        <line num="11" count="28" type="stmt"/>
         <line num="12" count="21" type="stmt"/>
-        <line num="13" count="13" type="cond" truecount="1" falsecount="0"/>
+        <line num="13" count="12" type="cond" truecount="1" falsecount="0"/>
         <line num="14" count="2" type="stmt"/>
-        <line num="19" count="30" type="stmt"/>
-        <line num="20" count="30" type="stmt"/>
-        <line num="21" count="30" type="stmt"/>
+        <line num="19" count="28" type="stmt"/>
+        <line num="20" count="28" type="stmt"/>
+        <line num="21" count="28" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
         <line num="25" count="0" type="cond" truecount="0" falsecount="3"/>
         <line num="32" count="14" type="stmt"/>
         <line num="33" count="8" type="stmt"/>
         <line num="34" count="8" type="stmt"/>
         <line num="35" count="8" type="stmt"/>
-        <line num="39" count="30" type="stmt"/>
+        <line num="39" count="28" type="stmt"/>
         <line num="40" count="14" type="stmt"/>
         <line num="49" count="0" type="stmt"/>
-        <line num="55" count="720" type="stmt"/>
+        <line num="55" count="672" type="stmt"/>
       </file>
       <file name="login.jsx" path="C:/School/frontend/frontend-2/chillmaps/src/pages/login.jsx">
         <metrics statements="30" coveredstatements="12" conditionals="20" coveredconditionals="6" methods="12" coveredmethods="6"/>
