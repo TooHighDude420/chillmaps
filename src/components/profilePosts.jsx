@@ -3,11 +3,11 @@ import { useEffect, useState } from "react"
 import Post from "./post";
 import databaseCallList from "../api";
 
-function ProfilePosts({ user }) {
+function ProfilePosts({ cUser }) {
     const [posts, setPosts] = useState(null);
 
     useEffect(() => {
-        databaseCallList.getPostsWithId(user[0].UserID).then((msg) => {
+        databaseCallList.getPostsWithId(cUser[0].UserID).then((msg) => {
             setPosts(msg);
         });
     }, []);

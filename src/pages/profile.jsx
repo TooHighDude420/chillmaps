@@ -24,9 +24,11 @@ function Profile() {
 
     useEffect(() => {
         databaseCallList.getUser().then((msg) => {
+            console.log(msg)
             setUser(msg);
             databaseCallList.getOwnUser(msg.id).then((mess) => {
-                setUser(mess);
+                console.log(mess)
+                setCUser(mess);
 
                 if (mess[0].Images) {
                     databaseCallList.getFromStorage(mess[0].Images.bucket, mess[0].Images.path).then((image) => {
@@ -64,8 +66,8 @@ function Profile() {
                 </div>
             </div>
             <div className="overflow-y-scroll w-[80%] h-[80vh] py-6 no-scrollbar">
-                {user ?
-                    page == "posts" ? <ProfilePosts user={user} /> : <ProfileSettings cUser={cUser} user={user} />
+                {user && cUser ?
+                    page == "posts" ? <ProfilePosts cUser={cUser} /> : <ProfileSettings cUser={cUser} user={user} />
                     : <p></p>
                 }
             </div>
